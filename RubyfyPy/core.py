@@ -35,13 +35,13 @@ class Hash(dict):
 
 class String(str):
     def upcase(self):
-        return self.upper()
+        return String(self.upper())
 
     def downcase(self):
-        return self.lower()
+        return String(self.lower())
 
     def reverse(self):
-        return self[::-1]
+        return String(self[::-1])
 
 def rubyfy(obj, shallow=False):
     match type(obj).__name__:

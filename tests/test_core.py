@@ -60,6 +60,13 @@ class TestRubyfyPy(unittest.TestCase):
         self.assertIsInstance(rubyfied_shallow, Array)
         self.assertNotIsInstance(rubyfied_shallow[1][1], Array)
         self.assertNotIsInstance(rubyfied_shallow[2]['a'], Hash)
+    
+    def test_string_chaining(self):
+        ruby_string = String("hello world")
+        self.assertEqual(ruby_string.upcase().reverse(), "DLROW OLLEH")
+        self.assertIsInstance(ruby_string.upcase(), String)
+        self.assertIsInstance(ruby_string.reverse(), String)
+
 
 if __name__ == '__main__':
     unittest.main()
