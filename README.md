@@ -1,68 +1,90 @@
 # RubyfyPy
+`Ruby methods for Python objects` (Weird, right?)
 
-RubyfyPy is a Python package. Weird, right?
+**While Python is amazing** and beats Ruby in many areas, cleanliness and readability are not among those. 
 
-**While Python is amazing** and beats Ruby in many areas, cleanliness and readability is not of those. Therefore, **developers used to Ruby** will often miss its obsessively organized landscape.
+As it happened to me, **developers used to Ruby** will often miss its obsessively organized landscape.
 
-To ease that transition, **this package provides Ruby-like methods** and behaviors for Python objects. It wraps Python's basic data structures with Ruby-inspired classes that implement familiar Ruby methods.
+So, to make the new place cosier, **this package provides Ruby-like methods** for Python objects.
 
-### Features and Ruby-like Methods
+Most of them will be perfectly useless once you get accustomed to Python, but, with some luck, they will help you understand how to do in Python everything you used to do in Ruby.
 
-- `Rubyfy()` method that will transform
-    - list > arrays
-    - dict > hash
-    - str > string
 
-- `Array` class with the methods:
-  - `first()`: Returns the first element
-  - `last()`: Returns the last element
-  - `each()`: Iterates through elements
-  - `map()`: Transforms elements
-  - `select()`: Filters elements
+## Methods and Features
 
-- `Hash` class with methods:
-  - `keys()` and `values()` for Ruby-style handling
-  - `get()` to access keys and values
+- **Array Utilities for Lists**
+  - `flatten`: Recursively flattens nested lists.
+  - `first`: Returns the first element of a list.
+  - `last`: Returns the last element of a list.
+  - `uniq`: Removes duplicate elements from a list while preserving order.
 
-- `String` class with methods:
-  - `upcase()`: Converts to uppercase
-  - `downcase()`: Converts to lowercase
-  - `reverse()`: Reverses the string
+- **Integer Utilities**
+  - `is_prime`: Determines if an integer is prime.
+  - `is_even`: Checks if an integer is even.
+  - `is_odd`: Checks if an integer is odd.
 
-### Installation
-Package is not yet deployed to [PyPI](https://pypi.org/), but you can go with:
+- **Functional Utilities**
+  - `is_hashable` in .core.py checks if an object is hashable.
 
-```
-git clone https://github.com/your-username/RubyfyPy.git
+>`flatten` and `uniq` have a `bang` parameter, which defaults to `False`. When set to `True`, the methods will modify the original list in place. See [Usage Examples](#usage-examples) for more details.
+
+## Installation
+
+Package is not yet deployed to [PyPI](https://pypi.org/), but you can install it manually:
+
+To develop locally, clone the repository and run:
+
+```bash
+git clone https://github.com/GyodaiDDA/RubyfyPy.git
 cd RubyfyPy
-pip install -e .
+pip install -e .[dev]
 ```
 
-### Usage
+To use it in a project (and I'm not sure why you would want to do that):
 
+```bash
+pip install git+https://github.com/GyodaiDDA/RubyfyPy.git
 ```
+
+## Usage Examples
+
+Include RubyfyPy in your Python code to get access to the methods:
+
+```python
 from RubyfyPy import *
 
-python_array = [1, 2, 3, 4, 5]
-ruby_array = rubyfy(python_array)
+# Flatten a nested list
+nested = [1, [2, 3], [4, [5, 6]]]
+print(flatten(nested))  # Output: [1, 2, 3, 4, 5, 6]
+flatten(nested, bang=True)  # nested is now [1, 2, 3, 4, 5, 6]
 
-ruby_array.len() # returns 5
-ruby_array.first() # returns 1
-ruby_array.each(lambda x: print(x)) # prints each element
+# Get the first and the last element of a list
+print(first([1, 2, 3]))  # Output: 1
+print(last([1, 2, 3]))   # Output: 3
 
-# Works recursively
-nested_list = [1, [2, [3]]]
-ruby_nested = rubyfy(nested_list)
-type(ruby_nested[1])  # <class 'RubyfyPy.core.Array'>
+# Remove duplicate elements from a list
+numbers = [1, 2, 2, 3, 3, 3]
+print(uniq(numbers))  # Output: [1, 2, 3]
+uniq(numbers, bang=True)  # numbers is now [1, 2, 3]
 
-ruby_hash = rubyfy({'name': 'John', 'age': 30})
-ruby_hash.values() # returns ['John', 30]
+# Working with integers
+print(is_prime(7))  # Output: True
+print(is_even(4))   # Output: True
+print(is_odd(3))    # Output: True
 
-ruby_string = rubyfy("hello world")
-ruby_string.upcase()  # "HELLO WORLD"
+# Check if an object is hashable
+print(is_hashable("string"))  # Output: True
 ```
 
-### Contributing
+## Running Tests
+
+RubyfyPy uses [pytest](https://docs.pytest.org/) for testing. To run the test suite, first make sure RubyfyPy is installed (preferably in editable mode) and then execute:
+
+```bash
+pytest
+```
+
+## Contributing
 
 Contributions are super welcome! Feel free to jump in.
 
@@ -70,8 +92,6 @@ Contributions are super welcome! Feel free to jump in.
 - Report issues via [GitHub Issues](https://github.com/your-username/RubyfyPy/issues)
 - Or just e-mail me `rodrigo.gyodai@gmail.com`
 
-## Project Status
-Just started.
+## License
 
-###
-*This project is licensed under the MIT License - see the LICENSE file for details.*
+This project is licensed under the MIT License.
