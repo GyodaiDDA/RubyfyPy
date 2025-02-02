@@ -92,6 +92,4 @@ Contributions are super welcome! Feel free to jump in.
 - Report issues via [GitHub Issues](https://github.com/your-username/RubyfyPy/issues)
 - Or just e-mail me `rodrigo.gyodai@gmail.com`
 
-## License
-
 This project is licensed under the MIT License.
